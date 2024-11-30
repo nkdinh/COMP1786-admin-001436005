@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="?android:attr/selectableItemBackground">
+
+    <!-- Class Name Text -->
+    <TextView
+        android:id="@+id/classNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yoga Class"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp"/>
+
+    <!-- Status Message (Class ongoing or ended) -->
+    <TextView
+        android:id="@+id/classStatusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Class Status"
+        android:textSize="14sp"
+        android:textColor="@android:color/holo_green_dark"
+        android:visibility="gone"/> <!-- Initially hidden -->
+
+</LinearLayout>

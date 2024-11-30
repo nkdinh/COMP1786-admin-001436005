@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundmain"
+    android:padding="20dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="47dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:layout_marginStart="-170dp"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/backicon" />
+
+        <ImageView
+            android:layout_width="259dp"
+            android:layout_height="251dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teacher Management"
+            android:textSize="37dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="25dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/searchTeacherBtn"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:text="Search Teachers"
+                android:textSize="20sp"
+                android:background="@color/purple_200"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/createTeacherBtn"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:text="Create A New Teacher"
+                android:textSize="20sp"
+                android:background="@color/teal_200"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/listTeacherBtn"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:text="Teacher's List"
+                android:textSize="20sp"
+                android:background="@color/light_green"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

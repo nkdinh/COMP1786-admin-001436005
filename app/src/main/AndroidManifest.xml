@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.universalyoga">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:name=".AppController"
+        android:icon="@drawable/logo_main"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo_main"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.UniversalYoga">
+        <activity
+            android:name=".ManageClassActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateCourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainCourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListCourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditCourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailCourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageTeacherActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ListActivity"
+            android:exported="true"
+            android:label="View All Classes" />
+        <activity
+            android:name=".EditActivity"
+            android:exported="true"
+            android:label="Edit Class" />
+        <activity
+            android:name=".CreateActivity"
+            android:exported="true"
+            android:label="Create Class" />
+        <activity
+            android:name=".DetailActivity"
+            android:exported="true"
+            android:label="Course Detail" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="true"
+            android:label="Search Class" />
+    </application>
+
+</manifest>

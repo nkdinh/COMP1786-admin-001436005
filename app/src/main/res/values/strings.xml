@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">UniversalYoga Admin</string>
+
+    <string-array name="class_category">
+        <item>Flow Yoga</item>
+        <item>Aerial Yoga</item>
+        <item>Family Yoga</item>
+    </string-array>
+
+    <string-array name="level">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Difficult</item>
+        <item>Very Difficult</item>
+    </string-array>
+</resources>

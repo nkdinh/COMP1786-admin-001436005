@@ -1,0 +1,140 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="@drawable/backgroundmain">
+
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/backicon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search a Class"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search Filter Mode"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textColor="@color/black" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <RadioButton
+            android:id="@+id/radioBtnCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:buttonTint="@color/black" />
+
+        <RadioButton
+            android:id="@+id/radioBtnTeacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teacher"
+            android:buttonTint="@color/black" />
+
+        <RadioButton
+            android:id="@+id/radioBtnDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:buttonTint="@color/black" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search Details"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/edtSelectDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select Date"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:focusable="false"
+        android:padding="12dp"
+        android:background="@android:drawable/btn_dropdown" />
+
+    <AutoCompleteTextView
+        android:id="@+id/actTeacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Teacher's Name"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@color/search" />
+
+    <Spinner
+        android:id="@+id/spinnerDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:minHeight="50dp"
+        android:background="@android:drawable/btn_dropdown"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textColor="@color/black" />
+
+
+    <TextView
+        android:id="@+id/tvEmptyListMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No classes found."
+        android:textSize="16sp"
+        android:gravity="center"
+        android:visibility="visible"
+        android:layout_marginBottom="8dp" />
+
+    <ListView
+        android:id="@+id/listview_classes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
+
+</LinearLayout>
