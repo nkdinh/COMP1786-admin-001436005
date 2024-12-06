@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/backgroundmain">
+    android:background="@drawable/background_main">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:elevation="4dp"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:src="@drawable/backicon" />
+            android:src="@drawable/back_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/light_green"
         android:gravity="center_vertical">
 
         <LinearLayout
@@ -52,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="Course Name:"
                 android:textSize="18sp"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -65,11 +65,12 @@
         android:gravity="center_vertical">
 
         <TextView
-            android:id="@+id/tvDataNameTeacher"
+            android:id="@+id/tvDataNameInstructor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teacher:"
+            android:text="Instructor:"
             android:textSize="18sp"
+            android:textColor="@color/black"
             android:textStyle="bold"/>
     </LinearLayout>
 
@@ -87,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Level:"
             android:textSize="18sp"
+            android:textColor="@color/black"
             android:textStyle="bold"/>
     </LinearLayout>
 
@@ -102,6 +104,7 @@
             android:id="@+id/tvDataDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Date:"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -121,6 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Start Time:"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -138,6 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity:"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -155,6 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Session's Duration:"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -173,6 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Price:"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -190,6 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Category:"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -206,6 +214,7 @@
             android:id="@+id/tvDataComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Comments:"
             android:textSize="18sp"
             android:textStyle="bold"/>

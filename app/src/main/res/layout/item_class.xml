@@ -8,12 +8,12 @@
     android:background="?android:attr/selectableItemBackground">
 
     <TextView
-        android:id="@+id/teacherName"
+        android:id="@+id/InstructorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="Teacher Name" />
+        android:text="Instructor Name" />
 
     <TextView
         android:id="@+id/startDate"

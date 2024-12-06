@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundmain"
+    android:background="@drawable/background_main"
     android:padding="16dp">
 
     <LinearLayout
@@ -19,18 +19,18 @@
             android:elevation="4dp"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:src="@drawable/backicon" />
+            android:src="@drawable/back_icon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teacher's Details"
+            android:text="Instructor's Details"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:textColor="@color/black" />
 
-        <!-- Teacher Name -->
+        <!-- Instructor Name -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,14 +43,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teacher's Name ️"
+                android:text="Instructor's Name ️"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvNameTeacher"
+            android:id="@+id/tvNameInstructor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -71,14 +71,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teacher's Email"
+                android:text="Instructor's Email"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvEmailTeacher"
+            android:id="@+id/tvEmailInstructor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -118,7 +118,7 @@
             android:layout_marginBottom="20dp" />
 
             <Button
-                android:id="@+id/btnEditTeacher"
+                android:id="@+id/btnEditInstructor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit"
@@ -127,7 +127,7 @@
                 android:layout_marginEnd="20dp" />
 
             <Button
-                android:id="@+id/btnDeleteTeacher"
+                android:id="@+id/btnDeleteInstructor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/red"

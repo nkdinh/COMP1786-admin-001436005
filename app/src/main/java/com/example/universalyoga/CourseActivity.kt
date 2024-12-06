@@ -5,10 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageButton
-import com.example.universalyoga.MainActivity
-import com.example.universalyoga.R
 
-class MainCourseActivity : AppCompatActivity() {
+class CourseActivity : AppCompatActivity() {
     private lateinit var btnBack: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,7 +27,7 @@ class MainCourseActivity : AppCompatActivity() {
         }
 
         btnList.setOnClickListener {
-            openActivity(ListCourseActivity::class.java)
+            openActivity(CourseListActivity::class.java)
         }
     }
     private fun navigateToActivity(destination: Class<*>) {

@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
 
-class DetailActivity : AppCompatActivity() {
+class ClassDetailActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: DBHelper
     private var classId: Long = -1
@@ -29,7 +29,7 @@ class DetailActivity : AppCompatActivity() {
         val tvPrice = findViewById<TextView>(R.id.tvDataPrice)
         val tvCategory = findViewById<TextView>(R.id.tvDataCategory)
         val tvLevel = findViewById<TextView>(R.id.tvDataLevel)
-        val tvNameTeacher = findViewById<TextView>(R.id.tvDataNameTeacher)
+        val tvNameInstructor = findViewById<TextView>(R.id.tvDataNameInstructor)
         val tvComments = findViewById<TextView>(R.id.tvDataComment)
         val btnEdit = findViewById<Button>(R.id.btnEdit)
         val btnDelete = findViewById<Button>(R.id.btnDelete)
@@ -38,7 +38,7 @@ class DetailActivity : AppCompatActivity() {
 
 
         updateData(
-            tvDate, tvTime, tvQuantity, tvCourseDuration, tvPrice, tvCategory, tvLevel, tvNameTeacher, tvComments, courseNameTextView
+            tvDate, tvTime, tvQuantity, tvCourseDuration, tvPrice, tvCategory, tvLevel, tvNameInstructor, tvComments, courseNameTextView
         )
 
         btnEdit.setOnClickListener { startEditActivity() }
@@ -49,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun startEditActivity() {
-        val editIntent = Intent(this, EditActivity::class.java).apply {
+        val editIntent = Intent(this, ClassEditActivity::class.java).apply {
             putExtra("CLASS_ID", classId)
         }
         startActivityForResult(editIntent, 100)
@@ -100,18 +100,18 @@ class DetailActivity : AppCompatActivity() {
         val tvPrice = findViewById<TextView>(R.id.tvDataPrice)
         val tvCategory = findViewById<TextView>(R.id.tvDataCategory)
         val tvLevel = findViewById<TextView>(R.id.tvDataLevel)
-        val tvNameTeacher = findViewById<TextView>(R.id.tvDataNameTeacher)
+        val tvNameInstructor = findViewById<TextView>(R.id.tvDataNameInstructor)
         val tvComments = findViewById<TextView>(R.id.tvDataComment)
         val courseNameTextView = findViewById<TextView>(R.id.DataCourseName)
 
 
-        updateData(tvDate, tvTime, tvQuantity, tvCourseDuration, tvPrice, tvCategory, tvLevel, tvNameTeacher, tvComments, courseNameTextView)
+        updateData(tvDate, tvTime, tvQuantity, tvCourseDuration, tvPrice, tvCategory, tvLevel, tvNameInstructor, tvComments, courseNameTextView)
     }
 
     private fun updateData(
         tvDate: TextView, tvTime: TextView, tvQuantity: TextView,
         tvCourseDuration: TextView, tvPrice: TextView, tvCategory: TextView,
-        tvLevel: TextView, tvNameTeacher: TextView, tvComments: TextView,
+        tvLevel: TextView, tvNameInstructor: TextView, tvComments: TextView,
         courseNameTextView: TextView
     ) {
         val db = dbHelper.readableDatabase
@@ -124,26 +124,38 @@ class DetailActivity : AppCompatActivity() {
         )
 
         if (cursor.moveToFirst()) {
-            tvDate.text = "Date: ${cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_DAY))}"
-            tvTime.text = "Start Time: ${cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_TIME))}"
-            tvQuantity.text = "Quantity: ${cursor.getInt(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_CAPACITY))} members"
-            tvCourseDuration.text = "Course Duration: ${cursor.getInt(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_DURATION))} minutes"
-            tvPrice.text = "Price: ${cursor.getInt(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_PRICE))}$"
-            tvCategory.text = "Category: ${cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_TYPE))}"
-            tvLevel.text = "Level: ${cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_DESCRIPTION))}"
-            tvNameTeacher.text = "Name Teacher: ${cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_TEACHER))}"
-            tvComments.text = "Comments: ${cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_COMMENTS))}"
-            courseNameTextView.text = "Course Name: ${cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_COURSE_NAME))}"
-        } else {
+            tvDate.text =
+                "Date: ${cursor.getString(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_DAY))}"
+            tvTime.text =
+                "Start Time: ${cursor.getString(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_TIME))}"
+            tvQuantity.text =
+                "Quantity: ${cursor.getInt(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_CAPACITY))} members"
+            tvCourseDuration.text =
+                "Course Duration: ${cursor.getInt(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_DURATION))} minutes"
+            tvPrice.text =
+                "Price: ${cursor.getInt(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_PRICE))}$"
+            tvCategory.text =
+                "Category: ${cursor.getString(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_TYPE))}"
+            tvLevel.text =
+                "Level: ${cursor.getString(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_DESCRIPTION))}"
+            tvNameInstructor.text =
+                "Name Instructor: ${cursor.getString(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_INSTRUCTOR))}"
+            tvComments.text =
+                "Comments: ${cursor.getString(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_COMMENTS))}"
+            courseNameTextView.text =
+                "Course Name: ${cursor.getString(cursor
+                    .getColumnIndexOrThrow(DBHelper.COLUMN_COURSE_NAME))}"
+        }
+        else {
             Toast.makeText(
                 this, "No class found.", Toast.LENGTH_SHORT).show()
         }

@@ -9,11 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.universalyoga.DBHelper
-import com.example.universalyoga.R
 
-class ListTeacherActivity : AppCompatActivity() {
-    private lateinit var listTeacher: ListView
+class InstructorListActivity : AppCompatActivity() {
+    private lateinit var listInstructor: ListView
     private lateinit var database: DBHelper
     private lateinit var btnBack: ImageButton
 
@@ -21,22 +19,22 @@ class ListTeacherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         supportActionBar?.hide()
-        setContentView(R.layout.activity_list_teacher)
+        setContentView(R.layout.activity_list_instructor)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        listTeacher = findViewById(R.id.listTeacher)
+        listInstructor = findViewById(R.id.listInstructor)
         database = DBHelper(this)
 
-        displayAllTeachers()
+        displayAllInstructors()
 
 
         btnBack = findViewById(R.id.btnBack)
 
         btnBack.setOnClickListener {
-            navigateBackTo(ManageTeacherActivity::class.java)
+            navigateBackTo(InstructorManagementActivity::class.java)
         }
 
 
@@ -48,33 +46,33 @@ class ListTeacherActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        displayAllTeachers()
+        displayAllInstructors()
     }
 
-    private fun displayAllTeachers() {
-        val teachers = database.getAllTeachers()
+    private fun displayAllInstructors() {
+        val Instructors = database.getAllInstructors()
 
-        val teacherDisplayList = teachers.map {
+        val InstructorDisplayList = Instructors.map {
             "Name: ${it["name"]}\nEmail: ${it["email"]}\nComment: ${it["comment"]}"
         }
-        val teacherIds = teachers.map { it["id"] as Long }
+        val InstructorIds = Instructors.map { it["id"] as Long }
 
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
-            teacherDisplayList
+            InstructorDisplayList
         )
-        listTeacher.adapter = adapter
+        listInstructor.adapter = adapter
 
-        listTeacher.setOnItemClickListener { _, _, position, _ ->
-            val selectedTeacherId = teacherIds[position]
-            openTeacherDetail(selectedTeacherId)
+        listInstructor.setOnItemClickListener { _, _, position, _ ->
+            val selectedInstructorId = InstructorIds[position]
+            openInstructorDetail(selectedInstructorId)
         }
     }
 
-    private fun openTeacherDetail(teacherId: Long) {
-        val intent = Intent(this, DetailTeacherActivity::class.java)
-        intent.putExtra("TEACHER_ID", teacherId)
+    private fun openInstructorDetail(InstructorId: Long) {
+        val intent = Intent(this, InstructorDetailActivity::class.java)
+        intent.putExtra("Instructor_ID", InstructorId)
         startActivity(intent)
     }
 }

@@ -9,15 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.universalyoga.DetailActivity
 
 
-class ListActivity : AppCompatActivity() {
+class ListFormatActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: DBHelper
     private lateinit var yogaClasses: MutableList<String>
     private lateinit var classIds: MutableList<Long>
-    private lateinit var adapter: YogaClassAdapter
+    private lateinit var adapter: ClassAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +40,9 @@ class ListActivity : AppCompatActivity() {
 
 
 
-        adapter = YogaClassAdapter(yogaClasses) { position ->
+        adapter = ClassAdapter(yogaClasses) { position ->
             val classId = classIds[position]
-            val intent = Intent(this, DetailActivity::class.java)
+            val intent = Intent(this, ClassDetailActivity::class.java)
             intent.putExtra("CLASS_ID", classId)
             startActivity(intent)
         }

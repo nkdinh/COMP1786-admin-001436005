@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/backgroundmain"
+    android:background="@drawable/background_main"
     android:padding="16dp">
 
     <ImageButton
@@ -13,7 +13,7 @@
         android:layout_height="48dp"
         android:padding="8dp"
         android:scaleType="centerInside"
-        android:src="@drawable/backicon" />
+        android:src="@drawable/back_icon" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,7 +1,6 @@
 package com.example.universalyoga
 
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,10 +8,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.universalyoga.DBHelper
-import com.example.universalyoga.R
 import com.google.firebase.database.FirebaseDatabase
 
 class DetailCourseActivity : AppCompatActivity() {
@@ -63,7 +58,7 @@ class DetailCourseActivity : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
-            navigateToScreen(ListCourseActivity::class.java)
+            navigateToScreen(CourseListActivity::class.java)
         }
 
     }
@@ -86,7 +81,7 @@ class DetailCourseActivity : AppCompatActivity() {
     }
 
     private fun navigateToEditCourse() {
-        val intent = Intent(this, EditCourseActivity::class.java)
+        val intent = Intent(this, CourseEditActivity::class.java)
         intent.putExtra("course_id", courseId)
         startActivityForResult(intent, REQUEST_CODE_EDIT_COURSE)
     }

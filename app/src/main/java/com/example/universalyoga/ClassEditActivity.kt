@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EditActivity : AppCompatActivity() {
+class ClassEditActivity : AppCompatActivity() {
 
     // setting up the layout
     private lateinit var databaseHelper: DBHelper
@@ -33,7 +33,7 @@ class EditActivity : AppCompatActivity() {
         yogaClassId = intent.getLongExtra("CLASS_ID", -1)
 
         spinnerCourseName = findViewById(R.id.spinnerCourseName)
-        val edtNameTeacher = findViewById<EditText>(R.id.edtEnterNameTeacher)
+        val edtNameInstructor = findViewById<EditText>(R.id.edtEnterNameInstructor)
         levelSpinner = findViewById(R.id.spinnerLevel)
         edtDate = findViewById(R.id.edtDate)
         edtTime = findViewById(R.id.edtTime)
@@ -58,13 +58,13 @@ class EditActivity : AppCompatActivity() {
 
         changeData(
             edtDate, edtTime, edtQuantity, edtDuration, edtPrice,
-            categorySpinner, edtNameTeacher, levelSpinner, edtComments, spinnerCourseName
+            categorySpinner, edtNameInstructor, levelSpinner, edtComments, spinnerCourseName
         )
 
         btnSave.setOnClickListener {
             saveData(
                 edtDate, edtTime, edtQuantity, edtDuration, edtPrice,
-                categorySpinner, edtNameTeacher, levelSpinner, edtComments, spinnerCourseName
+                categorySpinner, edtNameInstructor, levelSpinner, edtComments, spinnerCourseName
             )
         }
 
@@ -106,7 +106,7 @@ class EditActivity : AppCompatActivity() {
 
     // Editing the data
     private fun changeData(
-        edtDate: EditText, edtTime: EditText, edtQuantity: EditText, edtDuration: EditText, edtPrice: EditText, categorySpinner: Spinner, edtNameTeacher: EditText, levelSpinner: Spinner, edtComments: EditText, courseNameSpinner: Spinner
+        edtDate: EditText, edtTime: EditText, edtQuantity: EditText, edtDuration: EditText, edtPrice: EditText, categorySpinner: Spinner, edtNameInstructor: EditText, levelSpinner: Spinner, edtComments: EditText, courseNameSpinner: Spinner
     ) {
         val database = databaseHelper.readableDatabase
         val cursor = database.query(
@@ -127,8 +127,8 @@ class EditActivity : AppCompatActivity() {
                 DBHelper.COLUMN_DURATION)).toString())
             val price = cursor.getFloat(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_PRICE)).toInt()
             edtPrice.setText(price.toString())
-            edtNameTeacher.setText(cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_TEACHER)))
+            edtNameInstructor.setText(cursor.getString(cursor.getColumnIndexOrThrow(
+                DBHelper.COLUMN_INSTRUCTOR)))
             edtComments.setText(cursor.getString(cursor.getColumnIndexOrThrow(
                 DBHelper.COLUMN_COMMENTS)))
 
@@ -154,7 +154,7 @@ class EditActivity : AppCompatActivity() {
 
     // Saving data
     private fun saveData(
-        edtDate: EditText, edtTime: EditText, edtQuantity: EditText, edtDuration: EditText, edtPrice: EditText, categorySpinner: Spinner, edtNameTeacher: EditText, levelSpinner: Spinner, edtComments: EditText, courseNameSpinner: Spinner
+        edtDate: EditText, edtTime: EditText, edtQuantity: EditText, edtDuration: EditText, edtPrice: EditText, categorySpinner: Spinner, edtNameInstructor: EditText, levelSpinner: Spinner, edtComments: EditText, courseNameSpinner: Spinner
     ) {
         val dayOfWeek = edtDate.text.toString().trim()
         val courseTime = edtTime.text.toString().trim()
@@ -162,7 +162,7 @@ class EditActivity : AppCompatActivity() {
         val duration = edtDuration.text.toString().trim().toIntOrNull()
         val pricePerClass = edtPrice.text.toString().trim().toFloatOrNull()
         val typeOfClass = categorySpinner.selectedItem.toString()
-        val teacherName = edtNameTeacher.text.toString().trim()
+        val InstructorName = edtNameInstructor.text.toString().trim()
         val description = levelSpinner.selectedItem.toString()
         val additionalComments = edtComments.text.toString().trim()
         val courseName = courseNameSpinner.selectedItem.toString()
@@ -173,7 +173,7 @@ class EditActivity : AppCompatActivity() {
             capacity == null ||
             duration == null ||
             pricePerClass == null ||
-            teacherName.isEmpty()) {
+            InstructorName.isEmpty()) {
             Toast.makeText(
                 this, "Please fill in all information", Toast.LENGTH_SHORT).show()
             return
@@ -186,7 +186,7 @@ class EditActivity : AppCompatActivity() {
             put(DBHelper.COLUMN_DURATION, duration)
             put(DBHelper.COLUMN_PRICE, pricePerClass)
             put(DBHelper.COLUMN_TYPE, typeOfClass)
-            put(DBHelper.COLUMN_TEACHER, teacherName)
+            put(DBHelper.COLUMN_INSTRUCTOR, InstructorName)
             put(DBHelper.COLUMN_DESCRIPTION, description)
             put(DBHelper.COLUMN_COMMENTS, additionalComments)
             put(DBHelper.COLUMN_DATE, dayOfWeek)
@@ -199,7 +199,7 @@ class EditActivity : AppCompatActivity() {
             val yogaClassesRef = database.getReference("universal yoga_classes")
 
             val updatedClassData = mutableMapOf<String, Any>(
-                "date" to dayOfWeek, "startTime" to courseTime, "quantity" to capacity, "courseDuration" to duration, "price" to pricePerClass, "category" to typeOfClass, "nameTeacher" to teacherName, "level" to description, "comments" to additionalComments, "Course" to courseName
+                "date" to dayOfWeek, "startTime" to courseTime, "quantity" to capacity, "courseDuration" to duration, "price" to pricePerClass, "category" to typeOfClass, "nameInstructor" to InstructorName, "level" to description, "comments" to additionalComments, "Course" to courseName
             )
 
             yogaClassesRef.child(yogaClassId.toString()).updateChildren(updatedClassData)

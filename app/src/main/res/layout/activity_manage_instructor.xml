@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundmain"
+    android:background="@drawable/background_main"
     android:padding="20dp">
 
 
@@ -22,7 +22,7 @@
             android:layout_marginStart="-170dp"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:src="@drawable/backicon" />
+            android:src="@drawable/back_icon" />
 
         <ImageView
             android:layout_width="259dp"
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teacher Management"
+            android:text="Instructor Management"
             android:textSize="37dp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -52,12 +52,12 @@
             android:padding="5dp">
 
             <Button
-                android:id="@+id/searchTeacherBtn"
+                android:id="@+id/searchInstructorBtn"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:text="Search Teachers"
+                android:text="Search Instructors"
                 android:textSize="20sp"
-                android:background="@color/purple_200"
+                android:background="@color/light_purple"
                 android:textStyle="bold" />
 
 
@@ -71,12 +71,12 @@
             android:padding="5dp">
 
             <Button
-                android:id="@+id/createTeacherBtn"
+                android:id="@+id/createInstructorBtn"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:text="Create A New Teacher"
+                android:text="Create A New Instructor"
                 android:textSize="20sp"
-                android:background="@color/teal_200"
+                android:background="@color/light_cyan"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -88,10 +88,10 @@
             android:padding="5dp">
 
             <Button
-                android:id="@+id/listTeacherBtn"
+                android:id="@+id/listInstructorBtn"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:text="Teacher's List"
+                android:text="Instructor's List"
                 android:textSize="20sp"
                 android:background="@color/light_green"
                 android:textStyle="bold" />

@@ -27,7 +27,7 @@ class SearchActivity : AppCompatActivity() {
         val spinnerDetail: Spinner = findViewById(R.id.spinnerDetail)
         tvEmptyListMessage = findViewById(R.id.tvEmptyListMessage)
         val listViewClasses: ListView = findViewById(R.id.listview_classes)
-        val actTeacher: AutoCompleteTextView = findViewById(R.id.actTeacher)
+        val actInstructor: AutoCompleteTextView = findViewById(R.id.actInstructor)
         val edtSelectDate: EditText = findViewById(R.id.edtSelectDate)
         val backBtn: ImageButton = findViewById(R.id.btnBack)
 
@@ -37,21 +37,21 @@ class SearchActivity : AppCompatActivity() {
             when (checkedId) {
                 R.id.radioBtnCategory -> {
                     edtSelectDate.visibility = View.GONE
-                    actTeacher.visibility = View.GONE
+                    actInstructor.visibility = View.GONE
                     spinnerDetail.visibility = View.VISIBLE
                     selectSearchDetails("Category", spinnerDetail)
                 }
 
-                R.id.radioBtnTeacher -> {
+                R.id.radioBtnInstructor -> {
                     edtSelectDate.visibility = View.GONE
-                    actTeacher.visibility = View.VISIBLE
+                    actInstructor.visibility = View.VISIBLE
                     spinnerDetail.visibility = View.GONE
-                    initializeTeacherAutoComplete(actTeacher)
+                    initializeInstructorAutoComplete(actInstructor)
                 }
 
                 R.id.radioBtnDate -> {
                     edtSelectDate.visibility = View.VISIBLE
-                    actTeacher.visibility = View.GONE
+                    actInstructor.visibility = View.GONE
                     spinnerDetail.visibility = View.GONE
                 }
             }
@@ -63,22 +63,22 @@ class SearchActivity : AppCompatActivity() {
 
         listViewClasses.setOnItemClickListener { _, _, position, _ ->
             val classId = classIds[position]
-            val intent = Intent(this, DetailActivity::class.java)
+            val intent = Intent(this, ClassDetailActivity::class.java)
             intent.putExtra("CLASS_ID", classId)
             startActivity(intent)
         }
         supportActionBar?.hide()
     }
 
-    private fun initializeTeacherAutoComplete(teacherAutoCompleteTextView: AutoCompleteTextView) {
-        val nameTeacher = dbHelper.getTeachers()
-        val teacherAdapter = ArrayAdapter(
-            this, android.R.layout.simple_dropdown_item_1line, nameTeacher)
-        teacherAutoCompleteTextView.setAdapter(teacherAdapter)
+    private fun initializeInstructorAutoComplete(InstructorAutoCompleteTextView: AutoCompleteTextView) {
+        val nameInstructor = dbHelper.getInstructors()
+        val InstructorAdapter = ArrayAdapter(
+            this, android.R.layout.simple_dropdown_item_1line, nameInstructor)
+        InstructorAutoCompleteTextView.setAdapter(InstructorAdapter)
 
-        teacherAutoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
-            val selectedTeacher = parent.getItemAtPosition(position).toString()
-            getClasses("Teacher", selectedTeacher)
+        InstructorAutoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
+            val selectedInstructor = parent.getItemAtPosition(position).toString()
+            getClasses("Instructor", selectedInstructor)
         }
     }
 
@@ -132,7 +132,7 @@ class SearchActivity : AppCompatActivity() {
     private fun getClasses(filter: String, subOption: String) {
         val classes: List<Pair<Long, String>> = when (filter) {
             "Category" -> dbHelper.getClassesByType(subOption)
-            "Teacher" -> dbHelper.getClassesByTeacher(subOption)
+            "Instructor" -> dbHelper.getClassesByInstructor(subOption)
             "Date" -> {
                 getFormattedClassesByDate(subOption)
             }

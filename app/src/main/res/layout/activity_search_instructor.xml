@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundmain"
+    android:background="@drawable/background_main"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -16,12 +16,12 @@
         android:elevation="4dp"
         android:padding="8dp"
         android:scaleType="centerInside"
-        android:src="@drawable/backicon" />
+        android:src="@drawable/back_icon" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search A Teacher"
+        android:text="Search An Instructor"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -31,7 +31,7 @@
         android:id="@+id/edtSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter teacher's name"
+        android:hint="Enter Instructor's name"
         android:background="@color/white"
         android:gravity="center"
         android:inputType="text"
@@ -65,7 +65,7 @@
         android:visibility="gone" />
 
     <ListView
-        android:id="@+id/listTeacherDisplay"
+        android:id="@+id/listInstructorDisplay"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_weight="1"

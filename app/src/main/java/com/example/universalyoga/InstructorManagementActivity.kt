@@ -7,28 +7,28 @@ import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
-class ManageTeacherActivity : AppCompatActivity() {
+class InstructorManagementActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_manage_teacher)
+        setContentView(R.layout.activity_manage_instructor)
         supportActionBar?.hide()
 
-        val searchTeacherBtn: Button = findViewById(R.id.searchTeacherBtn)
-        val createTeacherBtn: Button = findViewById(R.id.createTeacherBtn)
-        val listTeacherBtn: Button = findViewById(R.id.listTeacherBtn)
+        val searchInstructorBtn: Button = findViewById(R.id.searchInstructorBtn)
+        val createInstructorBtn: Button = findViewById(R.id.createInstructorBtn)
+        val listInstructorBtn: Button = findViewById(R.id.listInstructorBtn)
         val btnBack: ImageView = findViewById(R.id.btnBack)
 
-        searchTeacherBtn.setOnClickListener {
-            openActivity(SearchTeacherActivity::class.java)
+        searchInstructorBtn.setOnClickListener {
+            openActivity(SearchInstructorActivity::class.java)
         }
 
-        createTeacherBtn.setOnClickListener {
-            openActivity(CreateTeacherActivity::class.java)
+        createInstructorBtn.setOnClickListener {
+            openActivity(CreateInstructorActivity::class.java)
         }
 
-        listTeacherBtn.setOnClickListener {
-            openActivity(ListTeacherActivity::class.java)
+        listInstructorBtn.setOnClickListener {
+            openActivity(InstructorListActivity::class.java)
         }
         btnBack.setOnClickListener {
             openActivity(MainActivity::class.java)

@@ -4,24 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.universalyoga.R
-import com.example.universalyoga.DBHelper
 
-class SearchTeacherActivity : AppCompatActivity() {
+class InstructorSearchActivity : AppCompatActivity() {
     private lateinit var edtSearch: EditText
     private lateinit var btnSearch: Button
-    private lateinit var listTeacherDisplay: ListView
+    private lateinit var listInstructorDisplay: ListView
     private lateinit var database: DBHelper
     private lateinit var btnBack: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_teacher)
+        setContentView(R.layout.activity_search_instructor)
         supportActionBar?.hide()
 
         edtSearch = findViewById(R.id.edtSearch)
         btnSearch = findViewById(R.id.btnSearch)
-        listTeacherDisplay = findViewById(R.id.listTeacherDisplay)
+        listInstructorDisplay = findViewById(R.id.listInstructorDisplay)
         btnBack = findViewById(R.id.btnBack)
 
         database = DBHelper(this)
@@ -30,7 +28,7 @@ class SearchTeacherActivity : AppCompatActivity() {
             performSearch()
         }
         btnBack.setOnClickListener {
-            navigateBackTo(ManageTeacherActivity::class.java)
+            navigateBackTo(InstructorManagementActivity::class.java)
         }
 
     }
@@ -50,19 +48,19 @@ class SearchTeacherActivity : AppCompatActivity() {
             return
         }
 
-        val searchResults = database.searchTeacherByName(searchQuery)
+        val searchResults = database.searchInstructorByName(searchQuery)
 
         if (searchResults.isEmpty()) {
             Toast.makeText(
-                this, "No teachers found", Toast.LENGTH_SHORT).show()
+                this, "No Instructors found", Toast.LENGTH_SHORT).show()
         } else {
             val adapter = ArrayAdapter(
                 this,
                 android.R.layout.simple_list_item_2,
                 android.R.id.text1,
-                searchResults.map { "Name Teacher: ${it["name"]}\nEmail Teacher: ${it["email"]}\nComment: ${it["comment"]}" }
+                searchResults.map { "Name Instructor: ${it["name"]}\nEmail Instructor: ${it["email"]}\nComment: ${it["comment"]}" }
             )
-            listTeacherDisplay.adapter = adapter
+            listInstructorDisplay.adapter = adapter
         }
     }
 }

@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreateActivity : AppCompatActivity() {
+class CreateClassActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: DBHelper
     private lateinit var edtDate: EditText
@@ -72,59 +72,6 @@ class CreateActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
     }
-    // Method to handle the data being inputted and submitted
-    private fun handleSubmit() {
-        val selectedCourse = spinnerCourse.selectedItem.toString()
-        val teacher = findViewById<EditText>(R.id.edtEnterNameTeacher).text.toString().trim()
-        val description = findViewById<Spinner>(R.id.spinnerLevel).selectedItem.toString()
-        val dayOfWeek = edtDate.text.toString().trim()
-        val timeOfCourse = edtTime.text.toString().trim()
-        val capacity = findViewById<EditText>(R.id.edtQuantity).text.toString().trim().toIntOrNull() ?: 0
-        val duration = findViewById<EditText>(R.id.edtDuration).text.toString().trim().toIntOrNull() ?: 0
-        val pricePerClass = findViewById<EditText>(R.id.edtPrice).text.toString().trim().toFloatOrNull() ?: 0f
-        val typeOfClass = findViewById<Spinner>(R.id.spinnerCategory).selectedItem.toString()
-        val additionalComments = findViewById<EditText>(R.id.edtComment).text.toString().trim()
-
-        if (teacher.isEmpty() ||
-            dayOfWeek.isEmpty() ||
-            timeOfCourse.isEmpty()) {
-            Toast.makeText(
-                this, "Required fields cannot be left blank", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val newRowId = dbHelper.insertClass(
-            teacher = teacher, description = description, dayOfWeek = dayOfWeek, course = selectedCourse, timeOfCourse = timeOfCourse, capacity = capacity, duration = duration, price = pricePerClass, typeOfClass = typeOfClass, additionalComments = additionalComments, date = dayOfWeek
-        )
-
-        if (newRowId != -1L) {
-            saveToFirebase(newRowId, selectedCourse, teacher, description, dayOfWeek, timeOfCourse, capacity, duration, pricePerClass, typeOfClass, additionalComments)
-        } else {
-            Toast.makeText(this, "Class creation failed", Toast.LENGTH_SHORT).show()
-        }
-    }
-    // Saving data to Firebase
-    private fun saveToFirebase(
-        newRowId: Long, courseName: String, teacher: String, description: String, dayOfWeek: String, timeOfCourse: String, capacity: Int, duration: Int, pricePerClass: Float, typeOfClass: String, additionalComments: String
-    ) {
-        val database = FirebaseDatabase.getInstance("https://universal-yoga-15325-default-rtdb.asia-southeast1.firebasedatabase.app")
-        val yogaClassesRef = database.getReference("universal yoga_classes")
-
-        val newClassData = mapOf(
-            "Course" to courseName, "nameTeacher" to teacher, "level" to description, "date" to dayOfWeek, "startTime" to timeOfCourse, "quantity" to capacity, "courseDuration" to duration, "price" to pricePerClass, "category" to typeOfClass, "comments" to additionalComments
-        )
-
-        yogaClassesRef.child(newRowId.toString()).setValue(newClassData)
-            .addOnSuccessListener {
-                Toast.makeText(
-                    this, "The class has been successfully created and the data has been saved to Firebase.", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(
-                    this, "Error saving data to Firebase: ${exception.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
     // Display date picker for the Date section
     private fun displayDatePicker(editText: EditText) {
         val currentDate = Calendar.getInstance()
@@ -172,6 +119,59 @@ class CreateActivity : AppCompatActivity() {
                 isUpdating = false
             }
         })
+    }
+    // Method to handle the data being inputted and submitted
+    private fun handleSubmit() {
+        val selectedCourse = spinnerCourse.selectedItem.toString()
+        val Instructor = findViewById<EditText>(R.id.edtEnterNameInstructor).text.toString().trim()
+        val description = findViewById<Spinner>(R.id.spinnerLevel).selectedItem.toString()
+        val dayOfWeek = edtDate.text.toString().trim()
+        val timeOfCourse = edtTime.text.toString().trim()
+        val capacity = findViewById<EditText>(R.id.edtQuantity).text.toString().trim().toIntOrNull() ?: 0
+        val duration = findViewById<EditText>(R.id.edtDuration).text.toString().trim().toIntOrNull() ?: 0
+        val pricePerClass = findViewById<EditText>(R.id.edtPrice).text.toString().trim().toFloatOrNull() ?: 0f
+        val typeOfClass = findViewById<Spinner>(R.id.spinnerCategory).selectedItem.toString()
+        val additionalComments = findViewById<EditText>(R.id.edtComment).text.toString().trim()
+
+        if (Instructor.isEmpty() ||
+            dayOfWeek.isEmpty() ||
+            timeOfCourse.isEmpty()) {
+            Toast.makeText(
+                this, "Required fields cannot be left blank", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val newRowId = dbHelper.insertClass(
+            Instructor = Instructor, description = description, dayOfWeek = dayOfWeek, course = selectedCourse, timeOfCourse = timeOfCourse, capacity = capacity, duration = duration, price = pricePerClass, typeOfClass = typeOfClass, additionalComments = additionalComments, date = dayOfWeek
+        )
+
+        if (newRowId != -1L) {
+            saveToFirebase(newRowId, selectedCourse, Instructor, description, dayOfWeek, timeOfCourse, capacity, duration, pricePerClass, typeOfClass, additionalComments)
+        } else {
+            Toast.makeText(this, "Class creation failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+    // Saving data to Firebase
+    private fun saveToFirebase(
+        newRowId: Long, courseName: String, Instructor: String, description: String, dayOfWeek: String, timeOfCourse: String, capacity: Int, duration: Int, pricePerClass: Float, typeOfClass: String, additionalComments: String
+    ) {
+        val database = FirebaseDatabase.getInstance("https://universal-yoga-15325-default-rtdb.asia-southeast1.firebasedatabase.app")
+        val yogaClassesRef = database.getReference("universal yoga_classes")
+
+        val newClassData = mapOf(
+            "Course" to courseName, "nameInstructor" to Instructor, "level" to description, "date" to dayOfWeek, "startTime" to timeOfCourse, "quantity" to capacity, "courseDuration" to duration, "price" to pricePerClass, "category" to typeOfClass, "comments" to additionalComments
+        )
+
+        yogaClassesRef.child(newRowId.toString()).setValue(newClassData)
+            .addOnSuccessListener {
+                Toast.makeText(
+                    this, "The class has been successfully created and the data has been saved.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(
+                    this, "Error saving data to Firebase: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
     }
     // Linking back to the Main Activity
     private fun navigateBackToMainActivity() {

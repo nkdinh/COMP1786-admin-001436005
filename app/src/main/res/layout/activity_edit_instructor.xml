@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/backgroundmain"
+    android:background="@drawable/background_main"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
@@ -15,12 +15,12 @@
         android:elevation="4dp"
         android:padding="8dp"
         android:scaleType="centerInside"
-        android:src="@drawable/backicon" />
+        android:src="@drawable/back_icon" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Teacher"
+        android:text="Edit Instructor"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -37,17 +37,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teacher's Name ️"
+            android:text="Instructor's Name ️"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edtNameTeacher"
+        android:id="@+id/edtNameInstructor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Teacher Name"
+        android:hint="Enter Instructor Name"
         android:inputType="textPersonName"
         android:background="@color/white"
         android:gravity="center"
@@ -69,17 +69,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="Teacher's Email"
+            android:text="Instructor's Email"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edtEmailTeacher"
+        android:id="@+id/edtEmailInstructor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Teacher's Email"
+        android:hint="Enter Instructor's Email"
         android:inputType="textEmailAddress"
         android:background="@color/white"
         android:gravity="center"
@@ -108,7 +108,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edtCommentTeacher"
+        android:id="@+id/edtCommentInstructor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter some Comments"

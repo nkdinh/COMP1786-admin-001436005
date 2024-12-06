@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    // Defining table for classes and teachers
+    // Defining table for classes and Instructors
     companion object {
         const val DATABASE_NAME = "YogaClass.db"
         const val DATABASE_VERSION = 13
@@ -22,15 +22,15 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val COLUMN_PRICE = "price"
         const val COLUMN_TYPE = "class_type"
         const val COLUMN_DESCRIPTION = "description"
-        const val COLUMN_TEACHER = "teacher"
+        const val COLUMN_INSTRUCTOR = "Instructor"
         const val COLUMN_COMMENTS = "additional_comments"
         const val COLUMN_DATE = "date"
         const val COLUMN_NAME = "name"
-        const val TEACHER_TABLE_NAME = "teacher"
-        const val COLUMN_TEACHER_ID = "teacher_id"
-        const val COLUMN_TEACHER_NAME = "teacher_name"
-        const val COLUMN_TEACHER_EMAIL = "email"
-        const val COLUMN_TEACHER_COMMENT = "comment_teacher"
+        const val INSTRUCTOR_TABLE_NAME = "instructor"
+        const val COLUMN_INSTRUCTOR_ID = "instructor_id"
+        const val COLUMN_INSTRUCTOR_NAME = "instructor_name"
+        const val COLUMN_INSTRUCTOR_EMAIL = "email"
+        const val COLUMN_INSTRUCTOR_COMMENT = "comment_instructor"
 
         // Defining table for the courses
         const val COURSE_TABLE_NAME = "course"
@@ -52,7 +52,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             $COLUMN_PRICE REAL,
             $COLUMN_TYPE TEXT,
             $COLUMN_DESCRIPTION TEXT,
-            $COLUMN_TEACHER TEXT,
+            $COLUMN_INSTRUCTOR TEXT,
             $COLUMN_COMMENTS TEXT,
             $COLUMN_NAME TEXT,  
             $COLUMN_DATE TEXT
@@ -61,13 +61,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         db.execSQL(createTable)
 
 
-        // Create the teacher table
-        val createTeacherTable = ("CREATE TABLE $TEACHER_TABLE_NAME (" +
-                "$COLUMN_TEACHER_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "$COLUMN_TEACHER_NAME TEXT NOT NULL," +
-                "$COLUMN_TEACHER_EMAIL TEXT," +
-                "$COLUMN_TEACHER_COMMENT TEXT)")
-        db.execSQL(createTeacherTable)
+        // Create the INSTRUCTOR table
+        val createInstructorTable = ("CREATE TABLE $INSTRUCTOR_TABLE_NAME (" +
+                "$COLUMN_INSTRUCTOR_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "$COLUMN_INSTRUCTOR_NAME TEXT NOT NULL," +
+                "$COLUMN_INSTRUCTOR_EMAIL TEXT," +
+                "$COLUMN_INSTRUCTOR_COMMENT TEXT)")
+        db.execSQL(createInstructorTable)
 
         // Create the course table
         val createCourseTable = """
@@ -84,16 +84,16 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         if (oldVersion < DATABASE_VERSION) {
             // If older versions < current version => drop table and re-create
-            db.execSQL("DROP TABLE IF EXISTS $TEACHER_TABLE_NAME")
-            val createTeacherTable = """
-            CREATE TABLE $TEACHER_TABLE_NAME (
-                $COLUMN_TEACHER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                $COLUMN_TEACHER_NAME TEXT NOT NULL,
-                $COLUMN_TEACHER_EMAIL TEXT,
-                $COLUMN_TEACHER_COMMENT TEXT
+            db.execSQL("DROP TABLE IF EXISTS $INSTRUCTOR_TABLE_NAME")
+            val createInstructorTable = """
+            CREATE TABLE $INSTRUCTOR_TABLE_NAME (
+                $COLUMN_INSTRUCTOR_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_INSTRUCTOR_NAME TEXT NOT NULL,
+                $COLUMN_INSTRUCTOR_EMAIL TEXT,
+                $COLUMN_INSTRUCTOR_COMMENT TEXT
             )
         """
-            db.execSQL(createTeacherTable)
+            db.execSQL(createInstructorTable)
         }
 
         if (oldVersion < DATABASE_VERSION) {
@@ -113,7 +113,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         duration: Int,
         price: Float,
         typeOfClass: String,
-        teacher: String,
+        Instructor: String,
         description: String,
         additionalComments: String,
         date: String
@@ -126,7 +126,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             put(COLUMN_DURATION, duration)
             put(COLUMN_PRICE, price)
             put(COLUMN_TYPE, typeOfClass)
-            put(COLUMN_TEACHER, teacher)
+            put(COLUMN_INSTRUCTOR, Instructor)
             put(COLUMN_DESCRIPTION, description)
             put(COLUMN_COMMENTS, additionalComments)
             put(COLUMN_DATE, date)
@@ -167,20 +167,20 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         return types
     }
 
-    // Retrieving teachers' data
-    fun getTeachers(): List<String> {
-        val teachers = mutableListOf<String>()
+    // Retrieving Instructors' data
+    fun getInstructors(): List<String> {
+        val instructors = mutableListOf<String>()
         val db = readableDatabase
-        val cursor: Cursor = db.query(true, TABLE_NAME, arrayOf(COLUMN_TEACHER), null, null, null, null, null, null)
+        val cursor: Cursor = db.query(true, TABLE_NAME, arrayOf(COLUMN_INSTRUCTOR), null, null, null, null, null, null)
 
         while (cursor.moveToNext()) {
-            val teacher = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER))
-            if (!teachers.contains(teacher)) {
-                teachers.add(teacher)
+            val instructor = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR))
+            if (!instructors.contains(instructor)) {
+                instructors.add(instructor)
             }
         }
         cursor.close()
-        return teachers
+        return instructors
     }
 
     // Retrieving classes based on course types
@@ -209,15 +209,15 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         return classList
     }
 
-    // Retrieving classes using teacher's name
-    fun getClassesByTeacher(teacher: String): List<Pair<Long, String>> {
+    // Retrieving classes using Instructor's name
+    fun getClassesByInstructor(Instructor: String): List<Pair<Long, String>> {
         val classList = mutableListOf<Pair<Long, String>>()
         val db = readableDatabase
         val cursor = db.query(
             TABLE_NAME,
             arrayOf(COLUMN_ID, COLUMN_DAY, COLUMN_TIME),
-            "$COLUMN_TEACHER = ?",
-            arrayOf(teacher),
+            "$COLUMN_INSTRUCTOR = ?",
+            arrayOf(Instructor),
             null,
             null,
             null
@@ -254,27 +254,27 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         return classes
     }
 
-    // Insert a new Teacher
-    fun insertTeacher(name: String, email: String, commentTeacher: String): Long {
+    // Insert a new Instructor
+    fun insertInstructor(name: String, email: String, commentInstructor: String): Long {
         val db = writableDatabase
         val contentValues = ContentValues().apply {
-            put(COLUMN_TEACHER_NAME, name)
-            put(COLUMN_TEACHER_EMAIL, email)
-            put(COLUMN_TEACHER_COMMENT, commentTeacher)
+            put(COLUMN_INSTRUCTOR_NAME, name)
+            put(COLUMN_INSTRUCTOR_EMAIL, email)
+            put(COLUMN_INSTRUCTOR_COMMENT, commentInstructor)
         }
-        return db.insert(TEACHER_TABLE_NAME, null, contentValues)
+        return db.insert(INSTRUCTOR_TABLE_NAME, null, contentValues)
     }
 
 
 
-    // Search teachers by Name
-    fun searchTeacherByName(name: String): List<Map<String, String>> {
-        val teacherList = mutableListOf<Map<String, String>>()
+    // Search Instructors by Name
+    fun searchInstructorByName(name: String): List<Map<String, String>> {
+        val InstructorList = mutableListOf<Map<String, String>>()
         val db = readableDatabase
         val cursor = db.query(
-            TEACHER_TABLE_NAME,
-            arrayOf(COLUMN_TEACHER_NAME, COLUMN_TEACHER_EMAIL, COLUMN_TEACHER_COMMENT),
-            "$COLUMN_TEACHER_NAME LIKE ?",
+            INSTRUCTOR_TABLE_NAME,
+            arrayOf(COLUMN_INSTRUCTOR_NAME, COLUMN_INSTRUCTOR_EMAIL, COLUMN_INSTRUCTOR_COMMENT),
+            "$COLUMN_INSTRUCTOR_NAME LIKE ?",
             arrayOf("%$name%"),
             null,
             null,
@@ -282,24 +282,24 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         )
 
         while (cursor.moveToNext()) {
-            val teacherData = mapOf(
-                "name" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_NAME)),
-                "email" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_EMAIL)),
-                "comment" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_COMMENT))
+            val instructorData = mapOf(
+                "name" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_NAME)),
+                "email" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_EMAIL)),
+                "comment" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_COMMENT))
             )
-            teacherList.add(teacherData)
+            InstructorList.add(instructorData)
         }
         cursor.close()
-        return teacherList
+        return InstructorList
     }
 
-    // Retrieving teachers' data
-    fun getAllTeachers(): List<Map<String, Any>> {
-        val teacherList = mutableListOf<Map<String, Any>>()
+    // Retrieving Instructors' data
+    fun getAllInstructors(): List<Map<String, Any>> {
+        val instructorList = mutableListOf<Map<String, Any>>()
         val db = readableDatabase
         val cursor = db.query(
-            TEACHER_TABLE_NAME,
-            arrayOf(COLUMN_TEACHER_ID, COLUMN_TEACHER_NAME, COLUMN_TEACHER_EMAIL, COLUMN_TEACHER_COMMENT),
+            INSTRUCTOR_TABLE_NAME,
+            arrayOf(COLUMN_INSTRUCTOR_ID, COLUMN_INSTRUCTOR_NAME, COLUMN_INSTRUCTOR_EMAIL, COLUMN_INSTRUCTOR_COMMENT),
             null,
             null,
             null,
@@ -308,25 +308,25 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         )
 
         while (cursor.moveToNext()) {
-            val teacherData = mapOf(
-                "id" to cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_ID)),
-                "name" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_NAME)),
-                "email" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_EMAIL)),
-                "comment" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_COMMENT))
+            val instructorData = mapOf(
+                "id" to cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_ID)),
+                "name" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_NAME)),
+                "email" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_EMAIL)),
+                "comment" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_COMMENT))
             )
-            teacherList.add(teacherData)
+            instructorList.add(instructorData)
         }
         cursor.close()
-        return teacherList
+        return instructorList
     }
 
 
-    fun getTeacherById(id: Long): Map<String, String>? {
+    fun getInstructorById(id: Long): Map<String, String>? {
         val db = readableDatabase
         val cursor = db.query(
-            TEACHER_TABLE_NAME,
-            arrayOf(COLUMN_TEACHER_NAME, COLUMN_TEACHER_EMAIL, COLUMN_TEACHER_COMMENT),
-            "$COLUMN_TEACHER_ID = ?",
+            INSTRUCTOR_TABLE_NAME,
+            arrayOf(COLUMN_INSTRUCTOR_NAME, COLUMN_INSTRUCTOR_EMAIL, COLUMN_INSTRUCTOR_COMMENT),
+            "$COLUMN_INSTRUCTOR_ID = ?",
             arrayOf(id.toString()),
             null,
             null,
@@ -334,35 +334,35 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         )
 
         return if (cursor.moveToFirst()) {
-            val teacherData = mapOf(
-                "name" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_NAME)),
-                "email" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_EMAIL)),
-                "comment" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER_COMMENT))
+            val instructorData = mapOf(
+                "name" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_NAME)),
+                "email" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_EMAIL)),
+                "comment" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_COMMENT))
             )
             cursor.close()
-            teacherData
+            instructorData
         } else {
             cursor.close()
             null
         }
     }
 
-    // Updating teachers' data in the Database
-    fun updateTeacher(id: Long, name: String, email: String, comment: String): Boolean {
+    // Updating Instructors' data in the Database
+    fun updateInstructor(id: Long, name: String, email: String, comment: String): Boolean {
         val db = writableDatabase
         val contentValues = ContentValues().apply {
-            put(COLUMN_TEACHER_NAME, name)
-            put(COLUMN_TEACHER_EMAIL, email)
-            put(COLUMN_TEACHER_COMMENT, comment)
+            put(COLUMN_INSTRUCTOR_NAME, name)
+            put(COLUMN_INSTRUCTOR_EMAIL, email)
+            put(COLUMN_INSTRUCTOR_COMMENT, comment)
         }
-        val rowsAffected = db.update(TEACHER_TABLE_NAME, contentValues, "$COLUMN_TEACHER_ID = ?", arrayOf(id.toString()))
+        val rowsAffected = db.update(INSTRUCTOR_TABLE_NAME, contentValues, "$COLUMN_INSTRUCTOR_ID = ?", arrayOf(id.toString()))
         return rowsAffected > 0
     }
 
-    // Deleting a teacher from the Database
-    fun deleteTeacher(id: Long): Boolean {
+    // Deleting a Instructor from the Database
+    fun deleteInstructor(id: Long): Boolean {
         val db = writableDatabase
-        val rowsAffected = db.delete(TEACHER_TABLE_NAME, "$COLUMN_TEACHER_ID = ?", arrayOf(id.toString()))
+        val rowsAffected = db.delete(INSTRUCTOR_TABLE_NAME, "$COLUMN_INSTRUCTOR_ID = ?", arrayOf(id.toString()))
         return rowsAffected > 0
     }
 
@@ -454,7 +454,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         val db = readableDatabase
         val cursor = db.query(
             TABLE_NAME,
-            arrayOf(COLUMN_TEACHER, COLUMN_DATE),
+            arrayOf(COLUMN_INSTRUCTOR, COLUMN_DATE),
             null,
             null,
             null,
@@ -464,7 +464,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         while (cursor.moveToNext()) {
             val classInstance = mapOf(
-                "Teacher" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEACHER)),
+                "instructor" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR)),
                 "date" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))
             )
             classList.add(classInstance)

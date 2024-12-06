@@ -37,7 +37,7 @@ class CreateCourseActivity : AppCompatActivity() {
 
         edtTime.setOnClickListener { showDatePicker() }
         btnCreate.setOnClickListener { handleCourseCreation() }
-        btnBack.setOnClickListener { navigateToScreen(MainCourseActivity::class.java) }
+        btnBack.setOnClickListener { navigateToScreen(CourseActivity::class.java) }
     }
     private fun navigateToScreen(destination: Class<*>) {
         val intent = Intent(this, destination)
@@ -71,7 +71,7 @@ class CreateCourseActivity : AppCompatActivity() {
         val comment = edtComment.text.toString().trim()
 
         if (nameCourse.isEmpty() || time.isEmpty() || comment.isEmpty()) {
-            Toast.makeText(this, "You have not filled in all the information.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You have not filled all the information.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -80,7 +80,7 @@ class CreateCourseActivity : AppCompatActivity() {
         if (newRowId != -1L) {
             saveToFirebase(newRowId.toString(), nameCourse, time, comment)
         } else {
-            showToast("Error: Unable to create course.")
+            showToast("Error: Unable to create the course.")
         }
     }
 
@@ -101,8 +101,8 @@ class CreateCourseActivity : AppCompatActivity() {
 
         coursesRef.child(courseId).setValue(courseData)
             .addOnSuccessListener {
-                showToast("Course \"$nameCourse\" was created successfully!")
-                navigateToScreen(MainCourseActivity::class.java)
+                showToast("Course \"$nameCourse\" was created!")
+                navigateToScreen(CourseActivity::class.java)
             }
             .addOnFailureListener { error ->
                 showToast("Error saving data to Firebase: ${error.message}")

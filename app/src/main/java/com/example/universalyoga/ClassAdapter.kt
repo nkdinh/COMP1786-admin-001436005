@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class YogaClassAdapter(
+class ClassAdapter(
     private val yogaClasses: List<String>,
     private val onItemClick: (Int) -> Unit) : RecyclerView
-        .Adapter<YogaClassAdapter.YogaClassViewHolder>() {
+        .Adapter<ClassAdapter.YogaClassViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YogaClassViewHolder {
         val view = LayoutInflater.from(parent.context)

@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundmain"
-    tools:context=".ListTeacherActivity">
+    android:background="@drawable/background_main"
+    tools:context=".ListInstructorActivity">
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -17,7 +17,7 @@
         android:elevation="4dp"
         android:padding="8dp"
         android:scaleType="centerInside"
-        android:src="@drawable/backicon"
+        android:src="@drawable/back_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="All Teachers"
+        android:text="All Instructors"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnBack" />
 
     <ListView
-        android:id="@+id/listTeacher"
+        android:id="@+id/listInstructor"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"

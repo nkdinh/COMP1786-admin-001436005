@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
-class EditCourseActivity : AppCompatActivity() {
+class CourseEditActivity : AppCompatActivity() {
 
     private lateinit var edtCourseName: EditText
     private lateinit var edtTime: EditText
@@ -47,11 +47,7 @@ class EditCourseActivity : AppCompatActivity() {
 
 
     }
-    private fun navigateToScreen(destination: Class<*>) {
-        val intent = Intent(this, destination)
-        startActivity(intent)
-        finish()
-    }
+
 
     private fun displayCourseDetails() {
         val course = dbHelper.getClassById(courseId)
@@ -109,6 +105,12 @@ class EditCourseActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Failed to update course.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun navigateToScreen(destination: Class<*>) {
+        val intent = Intent(this, destination)
+        startActivity(intent)
+        finish()
     }
 
     private fun updateCourseInFirebase(courseId: Long, nameCourse: String, time: String, comment: String) {

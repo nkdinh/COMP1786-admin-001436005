@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundmain"
+    android:background="@drawable/background_main"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".CreateCourseActivity">
@@ -18,7 +17,7 @@
         android:gravity="center"
         android:padding="8dp"
         android:scaleType="centerInside"
-        android:src="@drawable/backicon" />
+        android:src="@drawable/back_icon" />
 
     <ImageView
         android:layout_width="259dp"
@@ -53,7 +52,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/createicon" />
+            android:src="@drawable/create_icon" />
 
     <Button
         android:id="@+id/btnCreate"
@@ -87,7 +86,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="15dp"
-            android:src="@drawable/listicon" />
+            android:src="@drawable/list_icon" />
     </LinearLayout>
 
 

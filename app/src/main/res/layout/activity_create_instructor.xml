@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/backgroundmain"
+    android:background="@drawable/background_main"
     android:padding="16dp">
 
   <ImageButton
@@ -15,12 +15,12 @@
       android:elevation="4dp"
       android:padding="8dp"
       android:scaleType="centerInside"
-      android:src="@drawable/backicon" />
+      android:src="@drawable/back_icon" />
 
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Create A New Teacher"
+      android:text="Create A New Instructor"
       android:textSize="24sp"
       android:textStyle="bold"
       android:layout_gravity="center"
@@ -37,20 +37,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Teacher's Name"
+        android:text="Instructor's Name"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
   </LinearLayout>
 
   <EditText
-      android:id="@+id/edtTeacherName"
+      android:id="@+id/edtInstructorName"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="16dp"
       android:background="@color/white"
       android:gravity="center"
-      android:hint="Enter Teacher's Name"
+      android:hint="Enter Instructor's Name"
       android:minHeight="50dp"
       android:textSize="14sp"
       android:textStyle="bold"
@@ -67,20 +67,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Teacher's Email"
+        android:text="Instructor's Email"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
   </LinearLayout>
 
   <EditText
-      android:id="@+id/edtTeacherEmail"
+      android:id="@+id/edtInstructorEmail"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="16dp"
       android:background="@color/white"
       android:gravity="center"
-      android:hint="Enter Teacher's Email"
+      android:hint="Enter Instructor's Email"
       android:minHeight="50dp"
       android:textSize="14sp"
       android:textStyle="bold"
@@ -105,7 +105,7 @@
   </LinearLayout>
 
   <EditText
-      android:id="@+id/edtCommentTeacher"
+      android:id="@+id/edtCommentInstructor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="Enter some Comments here"
@@ -118,7 +118,7 @@
       android:layout_marginBottom="16dp" />
 
   <Button
-      android:id="@+id/btnSaveTeacher"
+      android:id="@+id/btnSaveInstructor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="Create"

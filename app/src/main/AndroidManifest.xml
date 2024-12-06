@@ -18,34 +18,34 @@
             android:name=".CreateCourseActivity"
             android:exported="false" />
         <activity
-            android:name=".MainCourseActivity"
+            android:name=".CourseActivity"
             android:exported="false" />
         <activity
-            android:name=".ListCourseActivity"
+            android:name=".CourseListActivity"
             android:exported="false" />
         <activity
-            android:name=".EditCourseActivity"
+            android:name=".CourseEditActivity"
             android:exported="false" />
         <activity
             android:name=".DetailCourseActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailTeacherActivity"
+            android:name=".InstructorDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".EditTeacherActivity"
+            android:name=".InstructorEditActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateTeacherActivity"
+            android:name=".CreateInstructorActivity"
             android:exported="false" />
         <activity
-            android:name=".ListTeacherActivity"
+            android:name=".InstructorListActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchTeacherActivity"
+            android:name=".SearchInstructorActivity"
             android:exported="false" />
         <activity
-            android:name=".ManageTeacherActivity"
+            android:name=".InstructorManagementActivity"
             android:exported="true">
         </activity>
 
@@ -59,19 +59,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListActivity"
+            android:name=".ListFormatActivity"
             android:exported="true"
             android:label="View All Classes" />
         <activity
-            android:name=".EditActivity"
+            android:name=".ClassEditActivity"
             android:exported="true"
             android:label="Edit Class" />
         <activity
-            android:name=".CreateActivity"
+            android:name=".CreateClassActivity"
             android:exported="true"
             android:label="Create Class" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".ClassDetailActivity"
             android:exported="true"
             android:label="Course Detail" />
         <activity

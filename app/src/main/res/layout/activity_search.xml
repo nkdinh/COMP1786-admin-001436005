@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center_horizontal"
-    android:background="@drawable/backgroundmain">
+    android:background="@drawable/background_main">
 
 
     <ImageButton
@@ -17,7 +17,7 @@
         android:layout_marginBottom="16dp"
         android:padding="8dp"
         android:scaleType="centerInside"
-        android:src="@drawable/backicon" />
+        android:src="@drawable/back_icon" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,10 +54,10 @@
             android:buttonTint="@color/black" />
 
         <RadioButton
-            android:id="@+id/radioBtnTeacher"
+            android:id="@+id/radioBtnInstructor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teacher"
+            android:text="Instructor"
             android:buttonTint="@color/black" />
 
         <RadioButton
@@ -91,10 +91,10 @@
         android:background="@android:drawable/btn_dropdown" />
 
     <AutoCompleteTextView
-        android:id="@+id/actTeacher"
+        android:id="@+id/actInstructor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Teacher's Name"
+        android:hint="Enter Instructor's Name"
         android:visibility="gone"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="16dp"

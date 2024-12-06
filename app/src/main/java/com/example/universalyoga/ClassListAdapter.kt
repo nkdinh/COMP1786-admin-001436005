@@ -23,11 +23,11 @@ class ClassListAdapter(private val classList: List<Map<String, String>>) :
     override fun getItemCount(): Int = classList.size
 
     class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val teacherNameText: TextView = itemView.findViewById(R.id.teacherName)
+        private val InstructorNameText: TextView = itemView.findViewById(R.id.InstructorName)
         private val startDateText: TextView = itemView.findViewById(R.id.startDate)
 
         fun bind(classInstance: Map<String, String>) {
-            teacherNameText.text = "Teacher: ${classInstance["Teacher"]}"
+            InstructorNameText.text = "Instructor: ${classInstance["Instructor"]}"
             startDateText.text = "Start date: ${classInstance["date"]}"
         }
     }
