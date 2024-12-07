@@ -43,7 +43,7 @@ class CourseEditActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             saveChanges()
         }
-        btnBack.setOnClickListener { navigateToScreen(DetailCourseActivity::class.java) }
+        btnBack.setOnClickListener { navigateToScreen(CourseDetailActivity::class.java) }
 
 
     }

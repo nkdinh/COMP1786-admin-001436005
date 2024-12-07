@@ -50,17 +50,17 @@ class InstructorListActivity : AppCompatActivity() {
     }
 
     private fun displayAllInstructors() {
-        val Instructors = database.getAllInstructors()
+        val instructors = database.getAllInstructors()
 
-        val InstructorDisplayList = Instructors.map {
+        val instructorDisplayList = instructors.map {
             "Name: ${it["name"]}\nEmail: ${it["email"]}\nComment: ${it["comment"]}"
         }
-        val InstructorIds = Instructors.map { it["id"] as Long }
+        val InstructorIds = instructors.map { it["id"] as Long }
 
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
-            InstructorDisplayList
+            instructorDisplayList
         )
         listInstructor.adapter = adapter
 

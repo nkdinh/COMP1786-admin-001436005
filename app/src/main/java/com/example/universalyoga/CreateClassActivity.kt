@@ -80,7 +80,7 @@ class CreateClassActivity : AppCompatActivity() {
             this,
             { _, year, month, dayOfMonth ->
                 currentDate.set(year, month, dayOfMonth)
-                val dayOfWeek = SimpleDateFormat("EEEE", Locale.getDefault()).format(currentDate.time)
+                val dayOfWeek = SimpleDateFormat("EEEE", Locale("vi", "VN")).format(currentDate.time)
 
                 val dateFormatter = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
                 val formattedDate = dateFormatter.format(currentDate.time)
@@ -123,7 +123,7 @@ class CreateClassActivity : AppCompatActivity() {
     // Method to handle the data being inputted and submitted
     private fun handleSubmit() {
         val selectedCourse = spinnerCourse.selectedItem.toString()
-        val Instructor = findViewById<EditText>(R.id.edtEnterNameInstructor).text.toString().trim()
+        val instructor = findViewById<EditText>(R.id.edtEnterNameInstructor).text.toString().trim()
         val description = findViewById<Spinner>(R.id.spinnerLevel).selectedItem.toString()
         val dayOfWeek = edtDate.text.toString().trim()
         val timeOfCourse = edtTime.text.toString().trim()
@@ -133,7 +133,7 @@ class CreateClassActivity : AppCompatActivity() {
         val typeOfClass = findViewById<Spinner>(R.id.spinnerCategory).selectedItem.toString()
         val additionalComments = findViewById<EditText>(R.id.edtComment).text.toString().trim()
 
-        if (Instructor.isEmpty() ||
+        if (instructor.isEmpty() ||
             dayOfWeek.isEmpty() ||
             timeOfCourse.isEmpty()) {
             Toast.makeText(
@@ -142,24 +142,24 @@ class CreateClassActivity : AppCompatActivity() {
         }
 
         val newRowId = dbHelper.insertClass(
-            Instructor = Instructor, description = description, dayOfWeek = dayOfWeek, course = selectedCourse, timeOfCourse = timeOfCourse, capacity = capacity, duration = duration, price = pricePerClass, typeOfClass = typeOfClass, additionalComments = additionalComments, date = dayOfWeek
+            instructor = instructor, description = description, dayOfWeek = dayOfWeek, course = selectedCourse, timeOfCourse = timeOfCourse, capacity = capacity, duration = duration, price = pricePerClass, typeOfClass = typeOfClass, additionalComments = additionalComments, date = dayOfWeek
         )
 
         if (newRowId != -1L) {
-            saveToFirebase(newRowId, selectedCourse, Instructor, description, dayOfWeek, timeOfCourse, capacity, duration, pricePerClass, typeOfClass, additionalComments)
+            saveToFirebase(newRowId, selectedCourse, instructor, description, dayOfWeek, timeOfCourse, capacity, duration, pricePerClass, typeOfClass, additionalComments)
         } else {
             Toast.makeText(this, "Class creation failed", Toast.LENGTH_SHORT).show()
         }
     }
     // Saving data to Firebase
     private fun saveToFirebase(
-        newRowId: Long, courseName: String, Instructor: String, description: String, dayOfWeek: String, timeOfCourse: String, capacity: Int, duration: Int, pricePerClass: Float, typeOfClass: String, additionalComments: String
+        newRowId: Long, courseName: String, instructor: String, description: String, dayOfWeek: String, timeOfCourse: String, capacity: Int, duration: Int, pricePerClass: Float, typeOfClass: String, additionalComments: String
     ) {
         val database = FirebaseDatabase.getInstance("https://universal-yoga-15325-default-rtdb.asia-southeast1.firebasedatabase.app")
         val yogaClassesRef = database.getReference("universal yoga_classes")
 
         val newClassData = mapOf(
-            "Course" to courseName, "nameInstructor" to Instructor, "level" to description, "date" to dayOfWeek, "startTime" to timeOfCourse, "quantity" to capacity, "courseDuration" to duration, "price" to pricePerClass, "category" to typeOfClass, "comments" to additionalComments
+            "Course" to courseName, "nameInstructor" to instructor, "level" to description, "date" to dayOfWeek, "startTime" to timeOfCourse, "quantity" to capacity, "courseDuration" to duration, "price" to pricePerClass, "category" to typeOfClass, "comments" to additionalComments
         )
 
         yogaClassesRef.child(newRowId.toString()).setValue(newClassData)

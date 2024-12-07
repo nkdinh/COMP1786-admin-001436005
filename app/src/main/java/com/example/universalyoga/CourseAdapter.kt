@@ -33,8 +33,18 @@ class CourseAdapter(private var courseList: List<Map<String, String>>,
     }
 
     fun updateData(newCourseList: List<Map<String, String>>) {
+        val oldSize = courseList.size
+        val newSize = newCourseList.size
+
         courseList = newCourseList
-        notifyDataSetChanged()
+
+        if (newSize > oldSize) {
+            notifyItemRangeInserted(oldSize, newSize - oldSize)
+        } else if (newSize < oldSize) {
+            notifyItemRangeRemoved(newSize, oldSize - newSize)
+        } else {
+            notifyItemRangeChanged(0, newSize)
+        }
     }
 
     override fun getItemCount(): Int = courseList.size

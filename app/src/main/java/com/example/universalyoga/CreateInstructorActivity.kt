@@ -63,7 +63,7 @@ class CreateInstructorActivity : AppCompatActivity() {
             uploadInstructorToFirebase(result, name, email, comment)
         } else {
             Toast.makeText(
-                this, "Failed to add the Instructor. Please try again.", Toast.LENGTH_SHORT
+                this, "Failed to add the instructor. Please try again.", Toast.LENGTH_SHORT
             ).show()
         }
     }

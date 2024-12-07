@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UniversalYoga">
         <activity
-            android:name=".ManageClassActivity"
+            android:name=".ClassManagementActivity"
             android:exported="false" />
         <activity
             android:name=".CreateCourseActivity"
@@ -27,7 +27,7 @@
             android:name=".CourseEditActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailCourseActivity"
+            android:name=".CourseDetailActivity"
             android:exported="false" />
         <activity
             android:name=".InstructorDetailActivity"

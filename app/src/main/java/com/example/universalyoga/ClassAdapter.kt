@@ -11,6 +11,9 @@ class ClassAdapter(
     private val onItemClick: (Int) -> Unit) : RecyclerView
         .Adapter<ClassAdapter.YogaClassViewHolder>() {
 
+    override fun getItemCount(): Int {
+        return yogaClasses.size
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YogaClassViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(android.R.layout.simple_list_item_1, parent, false)
@@ -23,10 +26,6 @@ class ClassAdapter(
         holder.itemView.setOnClickListener {
             onItemClick(position)
         }
-    }
-
-    override fun getItemCount(): Int {
-        return yogaClasses.size
     }
 
     class YogaClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

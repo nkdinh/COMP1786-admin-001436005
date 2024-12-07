@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
 
-class DetailCourseActivity : AppCompatActivity() {
+class CourseDetailActivity : AppCompatActivity() {
 
     private lateinit var tvNameCourse: TextView
     private lateinit var tvTime: TextView

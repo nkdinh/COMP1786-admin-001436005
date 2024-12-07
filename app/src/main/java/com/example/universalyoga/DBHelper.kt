@@ -22,7 +22,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val COLUMN_PRICE = "price"
         const val COLUMN_TYPE = "class_type"
         const val COLUMN_DESCRIPTION = "description"
-        const val COLUMN_INSTRUCTOR = "Instructor"
+        const val COLUMN_INSTRUCTOR = "instructor"
         const val COLUMN_COMMENTS = "additional_comments"
         const val COLUMN_DATE = "date"
         const val COLUMN_NAME = "name"
@@ -107,13 +107,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     // Add a new class
     fun insertClass(
         dayOfWeek: String,
-        course: String,  // Where course name is injected
+        course: String,
         timeOfCourse: String,
         capacity: Int,
         duration: Int,
         price: Float,
         typeOfClass: String,
-        Instructor: String,
+        instructor: String,
         description: String,
         additionalComments: String,
         date: String
@@ -126,23 +126,14 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             put(COLUMN_DURATION, duration)
             put(COLUMN_PRICE, price)
             put(COLUMN_TYPE, typeOfClass)
-            put(COLUMN_INSTRUCTOR, Instructor)
+            put(COLUMN_INSTRUCTOR, instructor)
             put(COLUMN_DESCRIPTION, description)
             put(COLUMN_COMMENTS, additionalComments)
             put(COLUMN_DATE, date)
-            put(COLUMN_NAME, course)  // Injecting course name here
+            put(COLUMN_NAME, course)
         }
 
         return db.insert(TABLE_NAME, null, contentValues)
-    }
-
-
-
-
-    // Removing a class from Database
-    fun deleteClass(classId: Long): Int {
-        val db = writableDatabase
-        return db.delete(TABLE_NAME, "$COLUMN_ID = ?", arrayOf(classId.toString()))
     }
 
     // Updating a class from Database
@@ -150,6 +141,14 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         val db = writableDatabase
         return db.update(TABLE_NAME, contentValues, "$COLUMN_ID = ?", arrayOf(classId.toString()))
     }
+
+    // Removing a class from Database
+    fun deleteClass(classId: Long): Int {
+        val db = writableDatabase
+        return db.delete(TABLE_NAME, "$COLUMN_ID = ?", arrayOf(classId.toString()))
+    }
+
+
 
     // Retrieving the types of courses
     fun getAllTypes(): List<String> {
@@ -210,14 +209,14 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     }
 
     // Retrieving classes using Instructor's name
-    fun getClassesByInstructor(Instructor: String): List<Pair<Long, String>> {
+    fun getClassesByInstructor(instructor: String): List<Pair<Long, String>> {
         val classList = mutableListOf<Pair<Long, String>>()
         val db = readableDatabase
         val cursor = db.query(
             TABLE_NAME,
             arrayOf(COLUMN_ID, COLUMN_DAY, COLUMN_TIME),
             "$COLUMN_INSTRUCTOR = ?",
-            arrayOf(Instructor),
+            arrayOf(instructor),
             null,
             null,
             null
@@ -265,11 +264,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         return db.insert(INSTRUCTOR_TABLE_NAME, null, contentValues)
     }
 
-
-
     // Search Instructors by Name
     fun searchInstructorByName(name: String): List<Map<String, String>> {
-        val InstructorList = mutableListOf<Map<String, String>>()
+        val instructorList = mutableListOf<Map<String, String>>()
         val db = readableDatabase
         val cursor = db.query(
             INSTRUCTOR_TABLE_NAME,
@@ -280,19 +277,17 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             null,
             null
         )
-
         while (cursor.moveToNext()) {
             val instructorData = mapOf(
                 "name" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_NAME)),
                 "email" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_EMAIL)),
                 "comment" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_COMMENT))
             )
-            InstructorList.add(instructorData)
+            instructorList.add(instructorData)
         }
         cursor.close()
-        return InstructorList
+        return instructorList
     }
-
     // Retrieving Instructors' data
     fun getAllInstructors(): List<Map<String, Any>> {
         val instructorList = mutableListOf<Map<String, Any>>()
@@ -306,7 +301,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             null,
             null
         )
-
         while (cursor.moveToNext()) {
             val instructorData = mapOf(
                 "id" to cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_ID)),
@@ -332,7 +326,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             null,
             null
         )
-
         return if (cursor.moveToFirst()) {
             val instructorData = mapOf(
                 "name" to cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTOR_NAME)),

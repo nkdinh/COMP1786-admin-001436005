@@ -22,6 +22,40 @@ class ClassEditActivity : AppCompatActivity() {
     private lateinit var levelSpinner: Spinner
     private lateinit var spinnerCourseName: Spinner
 
+    private fun showDatePickerDialog(editText: EditText) {
+        val calendar = Calendar.getInstance()
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
+            calendar.set(year, month, day)
+
+            val dayOfWeek = SimpleDateFormat("EEEE", Locale.getDefault()).format(calendar.time)  // "EEEE" để lấy tên thứ
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+
+            val finalDate = "$dayOfWeek, $formattedDate"
+
+            editText.setText(finalDate)
+        }
+
+        DatePickerDialog(
+            this,
+            dateSetListener,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+
+    private fun setupTimePicker(editText: EditText) {
+        editText.setOnClickListener {
+            val timePickerDialog = TimePickerDialog(this, { _, hourOfDay, minute ->
+                val timeFormat = String.format(Locale("vi", "VN"),"%02d:%02d", hourOfDay, minute)
+                editText.setText(timeFormat)
+            }, 12, 0, true)
+
+            timePickerDialog.show()
+        }
+    }
+
     // Connecting the objects
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,17 +105,14 @@ class ClassEditActivity : AppCompatActivity() {
         btnBack.setOnClickListener { finish() }
     }
 
-    // Loading the courses from Database
-    private fun loadCourseNames() {
-        val courseNames = databaseHelper.getAllCourses().map { it["name"].toString() }
-
-        if (courseNames.isNotEmpty()) {
-            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courseNames)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerCourseName.adapter = adapter
-        } else {
-            Toast.makeText(this, "No courses available", Toast.LENGTH_SHORT).show()
-        }
+    // Loading the levels from Database
+    private fun setupLevelSpinner() {
+        val level = resources.getStringArray(R.array.level)
+        val levelAdapter = ArrayAdapter(
+            this, android.R.layout.simple_spinner_item, level)
+        levelAdapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item)
+        levelSpinner.adapter = levelAdapter
     }
 
     // Loading the categories from Database
@@ -94,14 +125,17 @@ class ClassEditActivity : AppCompatActivity() {
         categorySpinner.adapter = classCategoryAdapter
     }
 
-    // Loading the levels from Database
-    private fun setupLevelSpinner() {
-        val level = resources.getStringArray(R.array.level)
-        val levelAdapter = ArrayAdapter(
-            this, android.R.layout.simple_spinner_item, level)
-        levelAdapter.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item)
-        levelSpinner.adapter = levelAdapter
+    // Loading the courses from Database
+    private fun loadCourseNames() {
+        val courseNames = databaseHelper.getAllCourses().map { it["name"].toString() }
+
+        if (courseNames.isNotEmpty()) {
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courseNames)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerCourseName.adapter = adapter
+        } else {
+            Toast.makeText(this, "No courses available", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // Editing the data
@@ -117,21 +151,35 @@ class ClassEditActivity : AppCompatActivity() {
             null, null, null
         )
         if (cursor.moveToFirst()) {
-            edtDate.setText(cursor.getString(cursor.getColumnIndexOrThrow(
+            edtDate.setText(String.format(Locale("vi", "VN"), "%s",
+                cursor.getString(cursor.getColumnIndexOrThrow(
                 DBHelper.COLUMN_DAY)))
-            edtTime.setText(cursor.getString(cursor.getColumnIndexOrThrow(
+            )
+            edtTime.setText(String.format(Locale("vi", "VN"), "%s",
+                cursor.getString(cursor.getColumnIndexOrThrow(
                 DBHelper.COLUMN_TIME)))
-            edtQuantity.setText(cursor.getInt(cursor.getColumnIndexOrThrow(
+            )
+            edtQuantity.setText(String.format(Locale("vi", "VN"), "%d",
+                cursor.getInt(cursor.getColumnIndexOrThrow(
                 DBHelper.COLUMN_CAPACITY)).toString())
-            edtDuration.setText(cursor.getInt(cursor.getColumnIndexOrThrow(
+            )
+            edtDuration.setText(String.format(Locale("vi", "VN"), "%d",
+                cursor.getInt(cursor.getColumnIndexOrThrow(
                 DBHelper.COLUMN_DURATION)).toString())
-            val price = cursor.getFloat(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_PRICE)).toInt()
-            edtPrice.setText(price.toString())
-            edtNameInstructor.setText(cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_INSTRUCTOR)))
-            edtComments.setText(cursor.getString(cursor.getColumnIndexOrThrow(
-                DBHelper.COLUMN_COMMENTS)))
-
+            )
+            val price =
+                cursor.getFloat(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_PRICE)).toInt()
+            edtPrice.setText(
+                String.format(Locale("vi", "VN"), "%d", price)
+            )
+            edtNameInstructor.setText(
+                String.format(Locale("vi", "VN"), "%s",
+                    cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_INSTRUCTOR)))
+            )
+            edtComments.setText(
+                String.format(Locale("vi", "VN"), "%s",
+                cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_COMMENTS)))
+            )
             val classCategory = resources.getStringArray(R.array.class_category)
             val level = resources.getStringArray(R.array.level)
             val courseName = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_COURSE_NAME))
@@ -146,7 +194,7 @@ class ClassEditActivity : AppCompatActivity() {
             courseNameSpinner.setSelection(coursePosition)
 
         } else {
-            Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.not_found), Toast.LENGTH_SHORT).show()
         }
 
         cursor.close()
@@ -219,37 +267,4 @@ class ClassEditActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDatePickerDialog(editText: EditText) {
-        val calendar = Calendar.getInstance()
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
-            calendar.set(year, month, day)
-
-            val dayOfWeek = SimpleDateFormat("EEEE", Locale.getDefault()).format(calendar.time)  // "EEEE" để lấy tên thứ
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val formattedDate = dateFormat.format(calendar.time)
-
-            val finalDate = "$dayOfWeek, $formattedDate"
-
-            editText.setText(finalDate)
-        }
-
-        DatePickerDialog(
-            this,
-            dateSetListener,
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        ).show()
-    }
-
-    private fun setupTimePicker(editText: EditText) {
-        editText.setOnClickListener {
-            val timePickerDialog = TimePickerDialog(this, { _, hourOfDay, minute ->
-                val timeFormat = String.format("%02d:%02d", hourOfDay, minute)
-                editText.setText(timeFormat)
-            }, 12, 0, true)
-
-            timePickerDialog.show()
-        }
-    }
 }

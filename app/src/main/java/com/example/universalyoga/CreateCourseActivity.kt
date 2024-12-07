@@ -39,6 +39,9 @@ class CreateCourseActivity : AppCompatActivity() {
         btnCreate.setOnClickListener { handleCourseCreation() }
         btnBack.setOnClickListener { navigateToScreen(CourseActivity::class.java) }
     }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
     private fun navigateToScreen(destination: Class<*>) {
         val intent = Intent(this, destination)
         startActivity(intent)
@@ -71,7 +74,8 @@ class CreateCourseActivity : AppCompatActivity() {
         val comment = edtComment.text.toString().trim()
 
         if (nameCourse.isEmpty() || time.isEmpty() || comment.isEmpty()) {
-            Toast.makeText(this, "You have not filled all the information.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You have not filled all the required information.",
+                Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -90,15 +94,11 @@ class CreateCourseActivity : AppCompatActivity() {
 
         val firebaseDb  = FirebaseDatabase.getInstance()
         val coursesRef = firebaseDb .getReference("courses_yoga")
-
-
         val courseData = mapOf(
             "nameCourse" to nameCourse,
             "time" to time,
             "comment" to comment
         )
-
-
         coursesRef.child(courseId).setValue(courseData)
             .addOnSuccessListener {
                 showToast("Course \"$nameCourse\" was created!")
@@ -108,7 +108,5 @@ class CreateCourseActivity : AppCompatActivity() {
                 showToast("Error saving data to Firebase: ${error.message}")
             }
     }
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
+
 }

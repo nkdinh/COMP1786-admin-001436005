@@ -52,7 +52,7 @@ class ClassDetailActivity : AppCompatActivity() {
         val editIntent = Intent(this, ClassEditActivity::class.java).apply {
             putExtra("CLASS_ID", classId)
         }
-        startActivityForResult(editIntent, 100)
+        startActivityForResult(editIntent, 100) // Deprecated, but no replacement yet
     }
 
     private fun confirmDelete() {
@@ -124,40 +124,48 @@ class ClassDetailActivity : AppCompatActivity() {
         )
 
         if (cursor.moveToFirst()) {
-            tvDate.text =
-                "Date: ${cursor.getString(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_DAY))}"
-            tvTime.text =
-                "Start Time: ${cursor.getString(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_TIME))}"
-            tvQuantity.text =
-                "Quantity: ${cursor.getInt(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_CAPACITY))} members"
-            tvCourseDuration.text =
-                "Course Duration: ${cursor.getInt(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_DURATION))} minutes"
-            tvPrice.text =
-                "Price: ${cursor.getInt(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_PRICE))}$"
-            tvCategory.text =
-                "Category: ${cursor.getString(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_TYPE))}"
-            tvLevel.text =
-                "Level: ${cursor.getString(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_DESCRIPTION))}"
-            tvNameInstructor.text =
-                "Name Instructor: ${cursor.getString(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_INSTRUCTOR))}"
-            tvComments.text =
-                "Comments: ${cursor.getString(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_COMMENTS))}"
-            courseNameTextView.text =
-                "Course Name: ${cursor.getString(cursor
-                    .getColumnIndexOrThrow(DBHelper.COLUMN_COURSE_NAME))}"
-        }
-        else {
-            Toast.makeText(
-                this, "No class found.", Toast.LENGTH_SHORT).show()
+            tvDate.text = getString(
+                R.string.date_text,
+                cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_DAY))
+            )
+            tvTime.text = getString(
+                R.string.start_time_text,
+                cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_TIME))
+            )
+            tvQuantity.text = getString(
+                R.string.quantity_text,
+                cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_CAPACITY))
+            )
+            tvCourseDuration.text = getString(
+                R.string.course_duration_text,
+                cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_DURATION))
+            )
+            tvPrice.text = getString(
+                R.string.price_text,
+                cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_PRICE))
+            )
+            tvCategory.text = getString(
+                R.string.category_text,
+                cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_TYPE))
+            )
+            tvLevel.text = getString(
+                R.string.level_text,
+                cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_DESCRIPTION))
+            )
+            tvNameInstructor.text = getString(
+                R.string.instructor_name_text,
+                cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_INSTRUCTOR))
+            )
+            tvComments.text = getString(
+                R.string.comments_text,
+                cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_COMMENTS))
+            )
+            courseNameTextView.text = getString(
+                R.string.course_name_text,
+                cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_COURSE_NAME))
+            )
+        } else {
+            Toast.makeText(this, getString(R.string.no_class_found), Toast.LENGTH_SHORT).show()
         }
         cursor.close()
     }

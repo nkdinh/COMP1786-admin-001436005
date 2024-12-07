@@ -45,7 +45,7 @@ class InstructorDetailActivity : AppCompatActivity() {
             displayInstructorDetails(instructorId)
         } else {
             Toast.makeText(
-                this, "Error loading Instructor data", Toast.LENGTH_SHORT).show()
+                this, "Error loading instructor data", Toast.LENGTH_SHORT).show()
             finish()
         }
 

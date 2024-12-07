@@ -6,7 +6,7 @@ import com.google.firebase.database.FirebaseDatabase
 class FirebaseSyncHelper {
     private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val yogaClassRef: DatabaseReference = firebaseDatabase.getReference("yoga_classes")
-    private val InstructorRef: DatabaseReference = firebaseDatabase.getReference("Instructors")
+    private val instructorRef: DatabaseReference = firebaseDatabase.getReference("Instructors")
     private val courseRef: DatabaseReference = firebaseDatabase.getReference("courses")
 
     // Sync yoga classes
@@ -20,10 +20,10 @@ class FirebaseSyncHelper {
 
     // Sync Instructors
     fun syncInstructors(dbHelper: DBHelper) {
-        val Instructors = dbHelper.getAllInstructors()
-        for (Instructor in Instructors) {
-            val InstructorId = Instructor["id"].toString()
-            InstructorRef.child(InstructorId).setValue(Instructor)
+        val instructors = dbHelper.getAllInstructors()
+        for (instructor in instructors) {
+            val InstructorId = instructor["id"].toString()
+            instructorRef.child(InstructorId).setValue(instructor)
         }
     }
 

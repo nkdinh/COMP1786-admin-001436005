@@ -53,11 +53,11 @@ class InstructorEditActivity : AppCompatActivity() {
     }
 
     private fun loadInstructorInfo(id: Long) {
-        val Instructor = database.getInstructorById(id)
-        if (Instructor != null) {
-            edtNameInstructor.setText(Instructor["name"])
-            edtEmailInstructor.setText(Instructor["email"])
-            edtCommentInstructor.setText(Instructor["comment"])
+        val instructor = database.getInstructorById(id)
+        if (instructor != null) {
+            edtNameInstructor.setText(instructor["name"])
+            edtEmailInstructor.setText(instructor["email"])
+            edtCommentInstructor.setText(instructor["comment"])
         } else {
             Toast.makeText(
                 this, "Error loading Instructor data", Toast.LENGTH_SHORT).show()

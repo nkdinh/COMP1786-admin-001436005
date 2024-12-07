@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             openActivity(CourseActivity::class.java)
         }
         manageClassInstance.setOnClickListener {
-            openActivity(ManageClassActivity::class.java)
+            openActivity(ClassManagementActivity::class.java)
         }
 
         supportActionBar?.hide()

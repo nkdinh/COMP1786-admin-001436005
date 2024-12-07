@@ -78,7 +78,7 @@ class SearchActivity : AppCompatActivity() {
 
         InstructorAutoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
             val selectedInstructor = parent.getItemAtPosition(position).toString()
-            getClasses("Instructor", selectedInstructor)
+            getClasses("instructor", selectedInstructor)
         }
     }
 
@@ -132,7 +132,7 @@ class SearchActivity : AppCompatActivity() {
     private fun getClasses(filter: String, subOption: String) {
         val classes: List<Pair<Long, String>> = when (filter) {
             "Category" -> dbHelper.getClassesByType(subOption)
-            "Instructor" -> dbHelper.getClassesByInstructor(subOption)
+            "instructor" -> dbHelper.getClassesByInstructor(subOption)
             "Date" -> {
                 getFormattedClassesByDate(subOption)
             }

@@ -20,7 +20,7 @@ class InstructorManagementActivity : AppCompatActivity() {
         val btnBack: ImageView = findViewById(R.id.btnBack)
 
         searchInstructorBtn.setOnClickListener {
-            openActivity(SearchInstructorActivity::class.java)
+            openActivity(InstructorSearchActivity::class.java)
         }
 
         createInstructorBtn.setOnClickListener {

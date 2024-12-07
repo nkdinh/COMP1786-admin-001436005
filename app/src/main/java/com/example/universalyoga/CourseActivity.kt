@@ -35,7 +35,6 @@ class CourseActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
     private fun openActivity(destination: Class<*>) {
         val intent = Intent(this, destination)
         startActivity(intent)

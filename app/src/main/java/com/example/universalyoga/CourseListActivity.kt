@@ -37,7 +37,7 @@ class CourseListActivity : AppCompatActivity() {
         courseAdapter = CourseAdapter(courseList) { course ->
             val courseId = course["id"]?.toLongOrNull()
             if (courseId != null) {
-                val intent = Intent(this, DetailCourseActivity::class.java).apply {
+                val intent = Intent(this, CourseDetailActivity::class.java).apply {
                     putExtra("course_id", courseId)
                     putExtra("course_name", course["name"])
                     putExtra("course_deadline", course["deadline"])
