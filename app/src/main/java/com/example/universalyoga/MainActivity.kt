@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         val searchBtn: Button = findViewById(R.id.searchBtn)
         val manageInstructor: Button = findViewById(R.id.manageInstructor)
         val manageCourse: Button = findViewById(R.id.manageCourse)
-        val manageClassInstance: Button = findViewById(R.id.manageClassInstance)
 
         createBtn.setOnClickListener {
             openActivity(CreateClassActivity::class.java)
@@ -34,9 +33,6 @@ class MainActivity : AppCompatActivity() {
         }
         manageCourse.setOnClickListener {
             openActivity(CourseActivity::class.java)
-        }
-        manageClassInstance.setOnClickListener {
-            openActivity(ClassManagementActivity::class.java)
         }
 
         supportActionBar?.hide()

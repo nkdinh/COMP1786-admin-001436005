@@ -42,7 +42,7 @@
             android:name=".InstructorListActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchInstructorActivity"
+            android:name=".InstructorSearchActivity"
             android:exported="false" />
         <activity
             android:name=".InstructorManagementActivity"

@@ -70,9 +70,9 @@ class InstructorListActivity : AppCompatActivity() {
         }
     }
 
-    private fun openInstructorDetail(InstructorId: Long) {
+    private fun openInstructorDetail(instructorId: Long) {
         val intent = Intent(this, InstructorDetailActivity::class.java)
-        intent.putExtra("Instructor_ID", InstructorId)
+        intent.putExtra("Instructor_ID", instructorId)
         startActivity(intent)
     }
 }
